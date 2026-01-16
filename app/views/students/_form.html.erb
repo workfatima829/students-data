@@ -1,8 +1,15 @@
+<!-- app/views/students/_form.html.erb -->
+
 <%= form_with(model: @student, local: true) do |f| %>
   <% if @student.errors.any? %>
-    <div class="mb-4 text-red-600">
-      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
-      <ul>
+    <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded">
+      <div class="flex items-center gap-2 mb-3">
+        <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+        </svg>
+        <h3 class="text-red-800 font-semibold"><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h3>
+      </div>
+      <ul class="list-disc list-inside space-y-1 text-red-700 text-sm">
         <% @student.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
@@ -10,22 +17,25 @@
     </div>
   <% end %>
 
-  <div class="mb-4">
-    <%= f.label :name, class: "block font-bold" %>
-    <%= f.text_field :name, class: "border p-2 w-full" %>
+  <div class="space-y-6">
+    <div class="group">
+      <%= f.label :name, class: "block text-sm font-semibold text-gray-700 mb-2" %>
+      <%= f.text_field :name, placeholder: "Enter student name", class: "w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition duration-200" %>
+    </div>
+
+    <div class="group">
+      <%= f.label :age, class: "block text-sm font-semibold text-gray-700 mb-2" %>
+      <%= f.number_field :age, placeholder: "Enter age", class: "w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition duration-200" %>
+    </div>
+
+    <div class="group">
+      <%= f.label :email, class: "block text-sm font-semibold text-gray-700 mb-2" %>
+      <%= f.email_field :email, placeholder: "Enter email address", class: "w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition duration-200" %>
+    </div>
   </div>
 
-  <div class="mb-4">
-    <%= f.label :age, class: "block font-bold" %>
-    <%= f.number_field :age, class: "border p-2 w-full" %>
-  </div>
-
-  <div class="mb-4">
-    <%= f.label :email, class: "block font-bold" %>
-    <%= f.email_field :email, class: "border p-2 w-full" %>
-  </div>
-
-  <div>
-    <%= f.submit class: "bg-blue-600 text-white px-4 py-2 rounded" %>
+  <div class="flex gap-3 mt-8">
+    <%= f.submit class: "flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 transform hover:shadow-lg" %>
+    <%= link_to "Cancel", students_path, class: "flex-1 text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded-lg transition duration-200" %>
   </div>
 <% end %>
