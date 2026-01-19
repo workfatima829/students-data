@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[show edit update destroy]
+  before_action :set_student, only: %i[show edit update destroy select_courses update_courses]
 
   def index
     @students = Student.all
@@ -31,10 +31,22 @@ class StudentsController < ApplicationController
       render :edit
     end
   end
+   def select_courses
+    @courses = Course.all
+  end
 
   def destroy
     @student.destroy
     redirect_to students_url, notice: "Student was successfully deleted."
+  end
+
+  def update_courses
+    if @student.update(student_params)
+      redirect_to @student, notice: "Courses successfully updated."
+    else
+      @courses = Course.all
+      render :select_courses
+    end
   end
 
   private
@@ -43,7 +55,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
   end
 
-  def student_params
-    params.require(:student).permit(:name, :age, :email)
-  end
+ def student_params
+  params.require(:student).permit(:name, :age, :email, course_ids: [])
+end
 end

@@ -4,17 +4,17 @@
 #   resources :students
 #    root to: redirect("/students/sign_in")
 # end
-
 # config/routes.rb
+
 Rails.application.routes.draw do
   devise_for :students
-  resources :courses, only: [:index]
-  resources :students, only: [] do
+ 
+  resources :students do  
     member do
       get :select_courses
       patch :update_courses
     end
   end
-
-  root "courses#index"
+resources :courses, only: [:index]
+ root to: redirect("/students/sign_in")
 end

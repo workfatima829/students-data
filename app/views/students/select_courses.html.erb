@@ -1,0 +1,12 @@
+<h1>Select Courses for <%= @student.name %></h1>
+
+<%= form_with(model: @student, url: update_courses_student_path(@student), method: :patch) do |f| %>
+  <% @courses.each do |course| %>
+    <div>
+      <%= check_box_tag "student[course_ids][]", course.id, @student.courses.include?(course) %>
+      <%= course.name %>
+    </div>
+  <% end %>
+
+  <%= f.submit "Save Courses" %>
+<% end %>
