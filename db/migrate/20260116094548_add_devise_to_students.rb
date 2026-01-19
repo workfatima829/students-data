@@ -10,7 +10,7 @@ class AddDeviseToStudents < ActiveRecord::Migration[8.1]
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
-      ## Rememberable
+      ## Rememberable 
       t.datetime :remember_created_at
 
       ## Trackable

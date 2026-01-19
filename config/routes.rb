@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   devise_for :students
   resources :students
-  root "students#index"
+   root to: redirect("/students/sign_in")
 end
